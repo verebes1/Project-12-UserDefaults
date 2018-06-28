@@ -10,11 +10,7 @@ import UIKit
 
 class CollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var people = [Person]() {
-        didSet {
-            //save()
-        }
-    }
+    var people = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,14 +95,14 @@ class CollectionViewController: UICollectionViewController, UIImagePickerControl
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = people[indexPath.item]
+        //let person = people[indexPath.item]
         
         let ac = UIAlertController(title: "Change name", message: "Change the name of the person", preferredStyle: .alert)
         ac.addTextField()
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Rename", style: .default, handler: { [unowned self, ac] _ in
             let newName = ac.textFields![0]
-            person.name = newName.text!
+            self.people[indexPath.item].name = newName.text!
             
             self.collectionView?.reloadData()
             self.save()

@@ -8,10 +8,20 @@
 
 import UIKit
 
+protocol MvcModelDelegate {
+    func didUpDateName(name: String)
+}
+
 class Person: NSObject, NSCoding {
     
-    var name: String
+    var name: String {
+        didSet{
+            delegate?.didUpDateName(name: name)
+        }
+    }
     var image: String
+    
+    var delegate: MvcModelDelegate?
     
     init(name: String, image: String) {
         self.name = name
